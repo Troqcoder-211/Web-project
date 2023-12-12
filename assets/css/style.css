@@ -62,7 +62,7 @@
 }
 
 .display-body-title-container {
-    width: 88%;
+    width: 97%;
     color: white;
     background-color: rgb(200, 22, 105);
     padding: 15px 15px;
@@ -76,7 +76,7 @@
 }
 
 .display-body-title-btn {
-    padding: 3px 7px;
+    padding: 2px 5px;
     background-color: rgb(200, 22, 105);
     color: white;
     cursor: pointer;
@@ -96,7 +96,7 @@
     position: absolute;
     top: 15px;
     display: flex;
-    width: 95%;
+    /* width: 95%; */
     bottom: 10px;
     overflow-y: scroll;
     box-shadow: 1px 1px 8px grey;
