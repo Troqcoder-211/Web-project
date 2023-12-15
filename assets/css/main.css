@@ -410,7 +410,7 @@
     position:relative;
 }
 #main-menu>li>a::before{
-    content:" ";
+    content:"  ";
     height:4px;
     width:0;
     background:#ddaf64;
@@ -433,16 +433,7 @@
     right:0;
     padding:10px 0px;
 }
-/* #main-menu>li>ul>li.has-child::after{
-    font-family: "Font Awesome 5 Free";
-    font-weight: 600;
-    content:"\f105";
-    color:#ddaf64;
-    position:absolute;
-    top:0;
-    right:0;
-    padding:10px 0px;
-} */
+
 #main-menu>li>ul>li.has-child{
     position: relative;
 }
@@ -530,7 +521,6 @@ figure{
     display:flex;
     align-items: center;
     justify-content: center;
-
     padding-top: 20px;
 }
 h1{

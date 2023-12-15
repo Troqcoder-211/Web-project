@@ -8,12 +8,12 @@ let comebackregister = document.querySelector('.auth-form_controls-back-register
 let transferRegister = document.querySelector('.auth-form_switch-btn-transferRegister');
 let transferLogin = document.querySelector('.auth-form_switch-btn-transferLogin');
 let footer=document.querySelector(".footer");
+
 function login() {
     if (modal.style.display == "none") {
         modal.style.display = "block";
         logins.style.display = "block";
         registers.style.display = "none";
-
     }
     else {
         modal.style.display = "none";
@@ -38,6 +38,7 @@ comebacklogin.addEventListener('click', () => {
         modal.style.display = "none";
     }
 })
+
 comebackregister.addEventListener('click', () => {
     if (modal.style.display == "block") {
         modal.style.display = "none";
@@ -684,7 +685,7 @@ let allProducts = [
         id: 45,
         name: 'Đồng hồ Richard Mille RM 028 Automatic Winding Divers Watch',
         image: 'richardmille5.png',
-        price: 38000000,
+        price: 3800000000,
         brand: `RichardMille`,
         Code: `  RM 028 `,
         Size: `48mmx39,3mm`,
@@ -1659,7 +1660,7 @@ btn_login.onclick = function () {
     var existingUsers = JSON.parse(localStorage.getItem('users')) || [];
     var loggedInUser = existingUsers.find(u => u.username === username_login && u.password === password_login);
     if (loggedInUser) {
-        alert("Dang nhap thanh cong")
+        alert("Đăng nhập thành công")
         if (loggedInUser.username == '0342301559') {
             window.location.href = 'index2.html'
         }
@@ -1675,7 +1676,7 @@ btn_login.onclick = function () {
             reloadCard()
         }
     }
-    else alert("Dang nhap that bai")
+    else alert("Đăng nhập thất bại")
 
 }
 function changeQuantity(key, quantity) {
@@ -1839,22 +1840,22 @@ searchInput.addEventListener('input',(e)=>{
     search.addEventListener('click',()=>{
         count=0;
         Main();
-        pagination.style.display = 'none';
         container.style.display = 'block';
         active.style.display = 'none';
         privacy.style.display = 'none';
         slider.style.display = 'none';
         footer.style.display='block';
-        changeTitle('Search Result'); 
-    
-    searchData=e.target.value.trim().toLowerCase();
-    //////console.log(searchData);
+        let searchData=e.target.value.trim().toLowerCase();
+        console.log(searchData);
+        let searchList=[];
         productList.forEach((item,key)=>{
-        //////console.log(item.innerText);
+        console.log(item.innerText);
         if(item.innerText.toLowerCase().includes(searchData))
         {
-            listProduct[key].style.display="block";
+            // listProduct[key].style.display="block";
             count+=1;
+            searchList.push(allProducts[key]);
+            console.log(searchList);
         }
         else{
             listProduct[key].style.display="none";
@@ -1862,12 +1863,31 @@ searchInput.addEventListener('input',(e)=>{
         })
         if(count==0){
             changeTitle('No Search Result...'); 
+            pagination.style.display= 'none';
         }
-        else changeTitle('Search Result');
+        else {
+            changeTitle('Search Result');
+            console.log(searchList);
+            while (list.hasChildNodes()) {
+                list.removeChild(list.firstChild);
+            }
+            initApp(searchList);
+            listProduct = document.querySelectorAll('.content .products-card');
+            while (listproducts.hasChildNodes()) {
+                listproducts.removeChild(listproducts.firstChild)
+            }
+            initProductsInf(searchList);
+            loadItem(listProduct);
+            thisPage=1;
+            pagination.style.display = 'block';
+            
+            
+        }
+        
+        
         
         container.style.display='block';
-        //////console.log(type);
-        //////console.log(buyTicket);
+        let buyTicket = document.querySelectorAll('.products-card-click');
         for(let i=0;i<buyTicket.length;i++)
         {
          buyTicket[i].addEventListener('click',()=>{
@@ -1878,7 +1898,7 @@ searchInput.addEventListener('input',(e)=>{
         )
         }
 
-    // //////console.log(resultData);
+    // console.log(resultData);
 })
    
 searchInput.addEventListener('keypress',(e)=>{
@@ -1886,43 +1906,63 @@ searchInput.addEventListener('keypress',(e)=>{
     if (keycode == '13') {
         count=0;
         Main();
-        pagination.style.display = 'none';
         container.style.display = 'block';
         active.style.display = 'none';
         privacy.style.display = 'none';
         slider.style.display = 'none';
         footer.style.display='block';
-        searchData=e.target.value.trim().toLowerCase();
-        //////console.log(searchData);
-            productList.forEach((item,key)=>{
-            //////console.log(item.innerText);
-            if(item.innerText.toLowerCase().includes(searchData))
-            {
-                listProduct[key].style.display="block";
-                count+=1;
+        let searchData=e.target.value.trim().toLowerCase();
+        console.log(searchData);
+        let searchList=[];
+        productList.forEach((item,key)=>{
+        console.log(item.innerText);
+        if(item.innerText.toLowerCase().includes(searchData))
+        {
+            // listProduct[key].style.display="block";
+            count+=1;
+            searchList.push(allProducts[key]);
+            console.log(searchList);
+        }
+        else{
+            listProduct[key].style.display="none";
+        }
+        })
+        if(count==0){
+            changeTitle('No Search Result...'); 
+            pagination.style.display= 'none';
+        }
+        else {
+            changeTitle('Search Result');
+            console.log(searchList);
+            while (list.hasChildNodes()) {
+                list.removeChild(list.firstChild);
             }
-            else{
-                listProduct[key].style.display="none";
+            initApp(searchList);
+            listProduct = document.querySelectorAll('.content .products-card');
+            while (listproducts.hasChildNodes()) {
+                listproducts.removeChild(listproducts.firstChild)
             }
-            })
-            if(count==0){
-                changeTitle('No Search Result...'); 
-            }
-            else changeTitle('Search Result');
+            initProductsInf(searchList);
+            loadItem(listProduct);
+            thisPage=1;
+            pagination.style.display = 'block';
             
-            container.style.display='block';
-            //////console.log(type);
-            //////console.log(buyTicket);
-            let buyTicket=document.querySelectorAll('.products-card-click');
-            for(let i=0;i<buyTicket.length;i++)
-            {
-             buyTicket[i].addEventListener('click',()=>{
-                    listproducts.children[i].classList.add('open');
-                    container.style.display='none';
-                    privacy.style.display='none';
-            }
-            )
-            }
+        }
+        
+        
+        
+        container.style.display='block';
+        let buyTicket = document.querySelectorAll('.products-card-click');
+        for(let i=0;i<buyTicket.length;i++)
+        {
+         buyTicket[i].addEventListener('click',()=>{
+                listproducts.children[i].classList.add('open');
+                container.style.display='none';
+                privacy.style.display='none';
+        }
+        )
+        }
+
 }
 })
    
